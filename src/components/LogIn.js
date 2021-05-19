@@ -1,14 +1,30 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { AuthContext } from "./Auth";
 import { login } from "./Functions";
+import { Button, InputGroup, FormControl } from "react-bootstrap";
+import style from "./css/all.module.css";
+import "./css/all.module.css";
 
 const LogIn = () => {
+  const [credential, setCredential] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setCredential({
+      ...credential,
+      [e.target.name]: e.target.value,
+    });
+    console.log(credential.email,credential.password);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password } = e.target.elements;
     try {
-      login(email.value, password.value);
+      console.log(credential.email);
+      login(credential.email, credential.password);
     } catch (error) {
       alert(error);
     }
@@ -19,14 +35,40 @@ const LogIn = () => {
   }
   return (
     <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label for="email">Email</label>
-        <input type="email" name="email" placeholder="Email" />
-        <label for="password">Password</label>
-        <input type="password" name="password" placeholder="Password" />
-        <button type="submit">Submit</button>
-      </form>
+      <div className={style.contain}>
+        <div className={style.left}>
+          <div className={style.left_content , style.left__desc}>
+            <h2>ToDo App</h2>
+            App where you can write your task
+          </div>
+        </div>
+        <div className={style.right}>
+          <form className={style.form} onSubmit={handleSubmit}  >
+            <h1 className={style.head}>Sign In</h1>
+
+            <InputGroup className="mb-3">
+              <FormControl
+                type="email"
+                placeholder="User-Email"
+                name="email"
+                onChange={handleChange}
+                aria-describedby="basic-addon1"
+              />
+            </InputGroup>
+            <InputGroup className="mb-3">
+              <FormControl
+                type="password"
+                placeholder="Password"
+                name="password"
+                onChange={handleChange}
+                aria-describedby="basic-addon1"
+              />
+            </InputGroup>
+            <Button type='submit' variant="primary">Sign In</Button>
+            <a href='/signup'>Not a user? signup </a>
+          </form>
+        </div>
+      </div>
     </>
   );
 };
