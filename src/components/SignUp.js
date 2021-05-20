@@ -1,29 +1,37 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { signup } from "./Functions";
+import { db } from "../services/firebase"
 import { InputGroup, FormControl } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import style from "./css/all.module.css";
 
 const SignUp = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(false);
+  const [user, setUser] = useState({});
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, password } = e.target.elements;
     try {
+      db.collection("Users").doc(`${email.value}`).set({
+        username: name.value,
+        email: email.value
+      });
       signup(email.value, password.value);
-      setCurrentUser(true);
+      // db.collection("Users").doc(`${email.value}`).get().then(doc =>setUser(doc.data()));
+      setCurrentUser(true)
     } catch (error) {
       alert(error);
     }
   };
+ 
   if (currentUser) {
     return <Redirect to="/dashboard" />;
   }
   return (
     <div className={style.contain}>
       <div className={style.left}>
-        <div className={style.left_content, style.left__desc}>
+        <div className={style.left_content,style.left__desc}>
           <h2>ToDo App</h2>
           App where you can write your task
         </div>

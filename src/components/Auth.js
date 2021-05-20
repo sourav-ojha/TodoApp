@@ -3,7 +3,7 @@ import { auth } from "../services/firebase.js";
 
 export const AuthContext = React.createContext();
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = (props) => {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
@@ -15,9 +15,12 @@ export const AuthProvider = ({ children }) => {
   if (loading) {
     return <p>Loading...</p>;
   }
+  // console.log(children);
   return (
     <AuthContext.Provider value={{ currentUser }}>
-      {children}
+   
+      {props.children}
+  
     </AuthContext.Provider>
   );
 };
