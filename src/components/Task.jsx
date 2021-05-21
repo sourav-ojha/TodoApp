@@ -21,14 +21,8 @@ function Task({ todo }) {
         disabled
         />
     </InputGroup>
-    <InputGroup>
-        <FormControl
-        type='date'
-        name='due_date'
-        value={todo.due_date}
-        disabled
-        />
-    </InputGroup>
+    
+   
     <InputGroup>
         <FormControl
         as="textarea"

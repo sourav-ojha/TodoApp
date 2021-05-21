@@ -14,6 +14,7 @@ const SignUp = () => {
     const { name, email, password } = e.target.elements;
     try {
       db.collection("Users").doc(`${email.value}`).set({
+        name: name.value,
         username: name.value,
         email: email.value
       });
