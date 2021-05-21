@@ -8,7 +8,7 @@ import style from "./css/all.module.css";
 
 const SignUp = () => {
   const [currentUser, setCurrentUser] = useState(false);
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, password } = e.target.elements;
@@ -32,7 +32,7 @@ const SignUp = () => {
   return (
     <div className={style.contain}>
       <div className={style.left}>
-        <div className={style.left_content,style.left__desc}>
+        <div className={style.left_content, style.left__desc}>
           <h2>ToDo App</h2>
           App where you can write your task
         </div>

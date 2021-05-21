@@ -27,7 +27,7 @@ const Dashboard = () => {
       return <Redirect to="/login" />;
    }
     fetchUser();
-  }, []);
+  }, [currentUser]);
 
   if (!currentUser) {
     return <Redirect to="/login" />;
