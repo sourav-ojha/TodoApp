@@ -15,7 +15,7 @@ function Task({ todo }) {
     </InputGroup>
     <InputGroup>
         <FormControl
-        type='date'
+        type='text'
         name='date_created'
         value={todo.date_created}
         disabled
